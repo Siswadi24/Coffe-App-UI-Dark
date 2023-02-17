@@ -1,4 +1,5 @@
 import 'package:coffe_app_ui_dark/ui/homepage.dart';
+import 'package:coffe_app_ui_dark/ui/splashScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
       ),
-      home: const HomePages(),
+      home: const SplashScreen(),
     );
   }
 }

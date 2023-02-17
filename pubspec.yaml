@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   curved_navigation_bar: ^1.0.3
+  flutter_spinkit: ^5.1.0
 
 dev_dependencies:
   flutter_test:
