@@ -74,135 +74,273 @@ class _HomePagesState extends State<HomePages> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[900],
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: Icon(Icons.menu),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: Icon(Icons.person),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // --- tulisan Find The Best Your Coffee ---
+    // Responsive Layout
+    final mediaQuery = MediaQuery.of(context);
+    final double screenHeight = mediaQuery.size.height;
+    final double screenWidth = mediaQuery.size.width;
+
+    if (screenHeight <= 800 && screenWidth <= 400) {
+      return Scaffold(
+        backgroundColor: Colors.grey[900],
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          leading: Icon(Icons.menu),
+          actions: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                'Find The Best Your Coffee',
-                style: TextStyle(
-                  fontFamily: 'Quesha',
-                  fontSize: 50,
-                  fontStyle: FontStyle.italic,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              padding: const EdgeInsets.only(right: 16.0),
+              child: Icon(Icons.person),
             ),
-
-            SizedBox(height: 10),
-
-            // --- Search Bar ---
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search Your Coffee',
-                  hintStyle: TextStyle(
-                    color: Colors.grey,
-                  ),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Colors.grey,
-                  ),
-                  suffixIcon: Icon(Icons.mic_none, color: Colors.grey),
-                  filled: true,
-                  fillColor: Colors.white.withOpacity(0.1),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            SizedBox(height: 10),
-
-            // --- Horizontal Tab List Menu ---
-            Container(
-              height: 30,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: CoffeType.length,
-                itemBuilder: ((context, index) {
-                  return CoffeTabMenus(
-                    TypeCoffee: CoffeType[index][0],
-                    isSelected: CoffeType[index][1],
-                    onTap: () {
-                      CoffeTypeTabSelected(index);
-                    },
-                  );
-                }),
-              ),
-            ),
-
-            SizedBox(height: 10.0),
-
-            // --- Horizontal List ---
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 2,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                children: [
-                  CardListCofe(
-                    imagePath: 'assets/images/cappucino1.jpg',
-                    price: '5.00',
-                    name: 'Cappucino + Water',
-                  ),
-                  CardListCofe(
-                    imagePath: 'assets/images/cappucino2.jpg',
-                    price: '5.00',
-                    name: 'Cappucino Latte',
-                  ),
-                  CardListCofe(
-                    imagePath: 'assets/images/cappucino3.jpg',
-                    price: '5.00',
-                    name: 'Cappucino Milk',
-                  ),
-                ],
-              ),
-            ),
-            SpecialList(),
           ],
         ),
-      ),
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.transparent,
-        animationDuration: const Duration(milliseconds: 500),
-        color: Colors.transparent,
-        buttonBackgroundColor: Colors.white,
-        items: List.generate(
-          _icons.length,
-          (index) => Icon(
-            _icons[index],
-            color: _selectedIndex == index ? Colors.black : _colors[index],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              // --- tulisan Find The Best Your Coffee ---
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  'Find The Best Your Coffee',
+                  style: TextStyle(
+                    fontFamily: 'Quesha',
+                    fontSize: 50,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 10),
+
+              // --- Search Bar ---
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search Your Coffee',
+                    hintStyle: TextStyle(
+                      color: Colors.grey,
+                    ),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.grey,
+                    ),
+                    suffixIcon: Icon(Icons.mic_none, color: Colors.grey),
+                    filled: true,
+                    fillColor: Colors.white.withOpacity(0.1),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 10),
+
+              // --- Horizontal Tab List Menu ---
+              Container(
+                height: 30,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: CoffeType.length,
+                  itemBuilder: ((context, index) {
+                    return CoffeTabMenus(
+                      TypeCoffee: CoffeType[index][0],
+                      isSelected: CoffeType[index][1],
+                      onTap: () {
+                        CoffeTypeTabSelected(index);
+                      },
+                    );
+                  }),
+                ),
+              ),
+
+              SizedBox(height: 10.0),
+
+              // --- Horizontal List ---
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 1.3,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  children: [
+                    CardListCofe(
+                      imagePath: 'assets/images/cappucino1.jpg',
+                      price: '5.00',
+                      name: 'Cappucino + Water',
+                    ),
+                    CardListCofe(
+                      imagePath: 'assets/images/cappucino2.jpg',
+                      price: '5.00',
+                      name: 'Cappucino Latte',
+                    ),
+                    CardListCofe(
+                      imagePath: 'assets/images/cappucino3.jpg',
+                      price: '5.00',
+                      name: 'Cappucino Milk',
+                    ),
+                  ],
+                ),
+              ),
+              SpecialList(),
+            ],
           ),
         ),
-        onTap: _onItemTapped,
-      ),
-    );
+        bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Colors.transparent,
+          animationDuration: const Duration(milliseconds: 500),
+          color: Colors.transparent,
+          buttonBackgroundColor: Colors.white,
+          items: List.generate(
+            _icons.length,
+            (index) => Icon(
+              _icons[index],
+              color: _selectedIndex == index ? Colors.black : _colors[index],
+            ),
+          ),
+          onTap: _onItemTapped,
+        ),
+      );
+    } else {
+      return Scaffold(
+        backgroundColor: Colors.grey[900],
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          leading: Icon(Icons.menu),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: Icon(Icons.person),
+            ),
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              // --- tulisan Find The Best Your Coffee ---
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  'Find The Best Your Coffee',
+                  style: TextStyle(
+                    fontFamily: 'Quesha',
+                    fontSize: 50,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 10),
+
+              // --- Search Bar ---
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search Your Coffee',
+                    hintStyle: TextStyle(
+                      color: Colors.grey,
+                    ),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.grey,
+                    ),
+                    suffixIcon: Icon(Icons.mic_none, color: Colors.grey),
+                    filled: true,
+                    fillColor: Colors.white.withOpacity(0.1),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 10),
+
+              // --- Horizontal Tab List Menu ---
+              Container(
+                height: 30,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: CoffeType.length,
+                  itemBuilder: ((context, index) {
+                    return CoffeTabMenus(
+                      TypeCoffee: CoffeType[index][0],
+                      isSelected: CoffeType[index][1],
+                      onTap: () {
+                        CoffeTypeTabSelected(index);
+                      },
+                    );
+                  }),
+                ),
+              ),
+
+              SizedBox(height: 10.0),
+
+              // --- Horizontal List ---
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 2,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  children: [
+                    CardListCofe(
+                      imagePath: 'assets/images/cappucino1.jpg',
+                      price: '5.00',
+                      name: 'Cappucino + Water',
+                    ),
+                    CardListCofe(
+                      imagePath: 'assets/images/cappucino2.jpg',
+                      price: '5.00',
+                      name: 'Cappucino Latte',
+                    ),
+                    CardListCofe(
+                      imagePath: 'assets/images/cappucino3.jpg',
+                      price: '5.00',
+                      name: 'Cappucino Milk',
+                    ),
+                  ],
+                ),
+              ),
+              SpecialList(),
+            ],
+          ),
+        ),
+        bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Colors.transparent,
+          animationDuration: const Duration(milliseconds: 500),
+          color: Colors.transparent,
+          buttonBackgroundColor: Colors.white,
+          items: List.generate(
+            _icons.length,
+            (index) => Icon(
+              _icons[index],
+              color: _selectedIndex == index ? Colors.black : _colors[index],
+            ),
+          ),
+          onTap: _onItemTapped,
+        ),
+      );
+    }
   }
 }
