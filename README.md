@@ -26,7 +26,7 @@ __*Jika masih bingung silahkan kunjungi website ini [cara menjalankan projek flu
 
 
 ## Hasil Gambar
-Welcome Page | Home Page |
+Splash Screen | Home Page |
 :----------:|:----------:|
 <img src="Demo/Aplikasi/SplashScreen.png"/> | <img src="Demo/Aplikasi/HomePage.png"/>
 
