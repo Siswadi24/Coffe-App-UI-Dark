@@ -3,7 +3,7 @@
 </h1>
 
 ## Konten
-- [Pengenalan](#Pengenalan)
+- [Pengenalan](#pengenalan)
 - [Installasi](#Cara-Instalasi-dan-Menjalankan-di-Local-Komputer)
 - [Hasil Gambar](#Hasil-Gambar)
 - [Fitur](#Fitur)
